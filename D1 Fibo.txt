@@ -1,0 +1,58 @@
+Fibo NON recursive
+
+
+
+#include <iostream>
+using namespace std;
+
+void printFibonacci(int n) {
+    int a = 0, b = 1, c;
+    
+    if (n >= 0) cout << a << " "; // Print the first term if n >= 0
+    if (n >= 1) cout << b << " "; // Print the second term if n >= 1
+    
+    for (int i = 2; i <= n; i++) {
+        c = a + b;
+        cout << c << " "; // Print the current Fibonacci term
+        a = b; // Move to the next term in the sequence
+        b = c;
+    }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number of terms (n) to print in the Fibonacci sequence: ";
+    cin >> n;
+    printFibonacci(n);
+    return 0;
+}
+
+
+
+
+
+
+Fibo Recursive
+#include <iostream>
+using namespace std;
+
+int fibonacciRecursive(int n) {
+    if (n <= 1) return n;
+    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
+}
+
+void printFibonacci(int n) {
+    for (int i = 0; i <= n; i++) {
+        cout << fibonacciRecursive(i) << " "; // Print each Fibonacci number up to n
+    }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number of terms (n) to print in the Fibonacci sequence: ";
+    cin >> n;
+    printFibonacci(n);
+    return 0;
+}

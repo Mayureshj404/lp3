@@ -1,0 +1,31 @@
+pragma solidity ^0.8.0;
+
+contract Bank {
+
+    // Mapping of account addresses to balances
+    mapping (address => uint256) public balances;
+
+    // Function to deposit money into an account
+    function deposit(uint256 amount) public payable {
+        // Increase the balance of the caller (the account making the deposit)
+        balances[msg.sender] += amount;
+    }
+
+    // Function to withdraw money from an account
+    function withdraw(uint256 amount) public {
+        // Check if the caller has enough balance
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+
+        // Decrease the balance of the caller
+        balances[msg.sender] -= amount;
+
+        // Transfer the amount to the caller
+        payable(msg.sender).transfer(amount);
+    }
+
+    // Function to view the balance of an account
+    function getBalance() public view returns (uint256) {
+        // Return the balance of the caller
+        return balances[msg.sender];
+    }
+}

@@ -1,0 +1,44 @@
+pragma solidity ^0.8.0;
+
+// Define a structure to store student data
+struct Student {
+    uint id;
+    string name;
+    uint age;
+}
+
+// Define a contract to store and manage student data
+contract StudentData {
+
+    // Array to store student data
+    Student[] public students;
+
+    // Function to add a new student
+    function addStudent(uint _id, string memory _name, uint _age) public {
+        // Create a new student object
+        Student memory newStudent = Student(_id, _name, _age);
+
+        // Add the new student to the array
+        students.push(newStudent);
+    }
+
+    // Function to get the details of a student
+    function getStudent(uint _id) public view returns (Student memory) {
+        // Iterate through the array to find the student with the given id
+        for (uint i = 0; i < students.length; i++) {
+            if (students[i].id == _id) {
+                return students[i];
+            }
+        }
+        // Return an empty student object if the student is not found
+        return Student(0, "", 0);
+    }
+
+    // Fallback function
+    fallback() external payable {
+        // This function is called when no other function matches the call
+        // You can use this function to handle any unexpected calls
+        // For example, you can use it to store ether received by the contract
+        // or to redirect the call to another function
+    }
+}
